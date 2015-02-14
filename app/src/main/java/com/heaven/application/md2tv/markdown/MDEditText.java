@@ -70,8 +70,6 @@ public class MDEditText extends EditText {
 
     @Override
     protected void onSelectionChanged(int selStart, int selEnd) {
-        preSelectionStart = selStart;
-        preSelectionEnd = selEnd;
         if(this.getDefaultEditable() && this.selectionSpan != null){
             ((Spannable) getText()).setSpan(this.selectionSpan, selStart, selEnd, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         }

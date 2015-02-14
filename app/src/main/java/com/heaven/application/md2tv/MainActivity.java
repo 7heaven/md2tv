@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
         ss.setSpan(new ForegroundColorSpan(0xFFFFFFFF), 30, 70, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         Drawable drawable = getResources().getDrawable(R.drawable.paint_streak);
-        textView.setSelectionSpan(new DrawableBackgroundSpan(drawable));
+        textView.setSelectionSpan(new CornerBackgroundSpan(0xFF0099CC, 10));
 
         ss.setSpan(new CornerBackgroundSpan(0xFF0099CC, 10), 30, 70, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         ss.setSpan(new CornerBackgroundSpan(0xFF0099CC, 10), 250, 450, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
