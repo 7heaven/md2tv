@@ -13,6 +13,7 @@ import android.text.style.ForegroundColorSpan;
 
 import com.heaven.application.md2tv.markdown.MDEditText;
 import com.heaven.application.md2tv.markdown.MDTextView;
+import com.heaven.application.md2tv.markdown.style.ArrowBackgroundSpan;
 import com.heaven.application.md2tv.markdown.style.CornerBackgroundSpan;
 import com.heaven.application.md2tv.markdown.style.DrawableBackgroundSpan;
 import com.heaven.application.md2tv.markdown.style.ShapeBackgroundSpan;
@@ -40,8 +41,9 @@ public class MainActivity extends Activity {
         ss.setSpan(new ForegroundColorSpan(0xFFFFFFFF), 30, 70, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         Drawable drawable = getResources().getDrawable(R.drawable.paint_streak);
-        textView.setSelectionSpan(new CornerBackgroundSpan(0xFF0099CC, 10));
+//        textView.setSelectionSpan(new CornerBackgroundSpan(0xFF0099CC, 10));
 
+        textView.setSelectionSpan(new ArrowBackgroundSpan(0xFFFF7373, 0x55000000), new ForegroundColorSpan(0xFFFFFFFF));
         ss.setSpan(new CornerBackgroundSpan(0xFF0099CC, 10), 30, 70, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         ss.setSpan(new CornerBackgroundSpan(0xFF0099CC, 10), 250, 450, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         ss.setSpan(new ForegroundColorSpan(0xFFFFFFFF), 250, 450, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

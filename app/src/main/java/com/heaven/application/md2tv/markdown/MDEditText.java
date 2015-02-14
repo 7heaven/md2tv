@@ -20,7 +20,7 @@ public class MDEditText extends EditText {
 
     private Object buffer;
 
-    private BackgroundSpannable selectionSpan;
+    private Object[] selectionSpan;
 
     private int defaultHighlightColor;
 
@@ -49,7 +49,7 @@ public class MDEditText extends EditText {
         //TODO parse markdown string
     }
 
-    public void setSelectionSpan(BackgroundSpannable span){
+    public void setSelectionSpan(Object... span){
         this.selectionSpan = span;
     }
 
@@ -71,7 +71,10 @@ public class MDEditText extends EditText {
     @Override
     protected void onSelectionChanged(int selStart, int selEnd) {
         if(this.getDefaultEditable() && this.selectionSpan != null){
-            ((Spannable) getText()).setSpan(this.selectionSpan, selStart, selEnd, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+            for(Object span : this.selectionSpan){
+                ((Spannable) getText()).setSpan(span, selStart, selEnd, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+            }
+
         }
     }
 
