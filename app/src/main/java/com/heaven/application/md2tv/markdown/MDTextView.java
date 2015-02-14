@@ -97,10 +97,6 @@ public class MDTextView extends TextView {
                 }
 
 
-
-
-
-
             }catch(ClassCastException e){
                 e.printStackTrace();
             }

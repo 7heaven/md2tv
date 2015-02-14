@@ -6,6 +6,8 @@ import android.graphics.Rect;
 import android.graphics.drawable.shapes.RoundRectShape;
 import android.graphics.drawable.shapes.Shape;
 import android.text.Layout;
+import android.util.Log;
+import android.widget.TextView;
 
 import com.heaven.application.md2tv.markdown.MDTextView;
 
@@ -23,7 +25,7 @@ public class ShapeBackgroundSpan implements BackgroundSpannable{
 
     private Paint paint;
 
-    private MDTextView tv;
+    private TextView tv;
 
     private int start;
     private int end;
@@ -65,7 +67,7 @@ public class ShapeBackgroundSpan implements BackgroundSpannable{
     }
 
     @Override
-    public void setMainTextView(MDTextView tv){
+    public void setMainTextView(TextView tv){
         this.tv = tv;
     }
 
@@ -99,6 +101,7 @@ public class ShapeBackgroundSpan implements BackgroundSpannable{
                     }else{
                         float[] width = new float[1];
                         String t = layout.getText().subSequence(layout.getLineEnd(i) - 1, layout.getLineEnd(i)).toString();
+
                         layout.getPaint().getTextWidths(t, width);
                         rect.right = (int) (layout.getSecondaryHorizontal(layout.getLineEnd(i) - 1) + width[0]);
                     }
@@ -125,6 +128,9 @@ public class ShapeBackgroundSpan implements BackgroundSpannable{
 
             for(int i = 0; i <= lineEnd - lineStart; i++){
                 Rect rect = lines[i];
+
+                if(rect.left == rect.right) continue;
+
                 shape.resize(rect.width(), rect.height());
 
                 if(i == 0){

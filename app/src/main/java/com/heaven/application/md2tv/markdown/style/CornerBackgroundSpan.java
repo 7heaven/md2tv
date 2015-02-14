@@ -6,6 +6,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.shapes.RoundRectShape;
 import android.graphics.drawable.shapes.Shape;
 import android.text.Layout;
+import android.widget.TextView;
 
 import com.heaven.application.md2tv.markdown.MDTextView;
 
@@ -24,7 +25,7 @@ public class CornerBackgroundSpan implements BackgroundSpannable {
 
     private Paint paint;
 
-    private MDTextView tv;
+    private TextView tv;
 
     private int start;
     private int end;
@@ -55,7 +56,7 @@ public class CornerBackgroundSpan implements BackgroundSpannable {
     }
 
     @Override
-    public void setMainTextView(MDTextView tv){
+    public void setMainTextView(TextView tv){
         this.tv = tv;
     }
 

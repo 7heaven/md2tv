@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
         ss.setSpan(new ForegroundColorSpan(0xFFFFFFFF), 30, 70, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         Drawable drawable = getResources().getDrawable(R.drawable.paint_streak);
-        ss.setSpan(new DrawableBackgroundSpan(drawable), 500, 650, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textView.setSelectionSpan(new DrawableBackgroundSpan(drawable));
 
         ss.setSpan(new CornerBackgroundSpan(0xFF0099CC, 10), 30, 70, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         ss.setSpan(new CornerBackgroundSpan(0xFF0099CC, 10), 250, 450, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -55,9 +55,12 @@ public class MainActivity extends Activity {
 
         ss.setSpan(shapeSpan, 700, 890, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        textView.setSelectionSpan(new CornerBackgroundSpan(0xFF0099CC, 10));
+//        textView.setSelectionSpan(new CornerBackgroundSpan(0xFF0099CC, 10));
 
         textView.setText(ss);
+        textView.setFocusable(true);
+        textView.setEnabled(true);
+        textView.requestFocus();
     }
 
 }

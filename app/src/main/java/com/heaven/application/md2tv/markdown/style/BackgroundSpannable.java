@@ -1,6 +1,7 @@
 package com.heaven.application.md2tv.markdown.style;
 
 import android.graphics.Canvas;
+import android.widget.TextView;
 
 import com.heaven.application.md2tv.markdown.MDTextView;
 
@@ -9,7 +10,7 @@ import com.heaven.application.md2tv.markdown.MDTextView;
  */
 public interface BackgroundSpannable {
 
-    public void setMainTextView(MDTextView tv);
+    public void setMainTextView(TextView tv);
 
     public void setRange(int start, int end);
 

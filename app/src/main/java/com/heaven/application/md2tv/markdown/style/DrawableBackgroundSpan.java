@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.text.Layout;
+import android.widget.TextView;
 
 import com.heaven.application.md2tv.markdown.MDTextView;
 
@@ -22,7 +23,7 @@ public class DrawableBackgroundSpan implements BackgroundSpannable {
 
     private Paint paint;
 
-    private MDTextView tv;
+    private TextView tv;
 
     private int start;
     private int end;
@@ -46,7 +47,7 @@ public class DrawableBackgroundSpan implements BackgroundSpannable {
     }
 
     @Override
-    public void setMainTextView(MDTextView tv){
+    public void setMainTextView(TextView tv){
         this.tv = tv;
     }
 
