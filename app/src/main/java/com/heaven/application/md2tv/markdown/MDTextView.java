@@ -107,9 +107,7 @@ public class MDTextView extends TextView {
         }
 
         if(shouldBackgroundSpanDraw && cacheBackgroundSpannables != null && cacheBackgroundSpannables.length > 0){
-            Log.d("shouldBackgroundSpanDraw", "dd");
             for(int i = 0; i < cacheBackgroundSpannables.length; i++){
-//                if(cacheBackgroundSpannables[i] == this.selectionSpan) continue;
                 cacheBackgroundSpannables[i].updateDrawState(canvas);
             }
         }

@@ -3,6 +3,7 @@ package com.heaven.application.md2tv.markdown.style;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PointF;
 
 /**
  * Created by caifangmao on 15/2/14.
@@ -34,15 +35,41 @@ public class ArrowBackgroundSpan extends BackgroundSpannable {
 
             int halfHeight = height / 2;
 
-            startArrow.moveTo(0, 0);
-            startArrow.lineTo(halfHeight, 0);
-            startArrow.lineTo(0, halfHeight);
-            startArrow.close();
+            float startP = (float) (-Math.PI / 2);
+            float perP = (float) ((Math.PI * 2) / 10);
 
-            endArrow.moveTo(width, height);
-            endArrow.lineTo(width, height - halfHeight);
-            endArrow.lineTo(width - halfHeight, height);
+            PointF correctPoint = centerRadiusPoint(-halfHeight, halfHeight, startP, halfHeight);
+            startArrow.moveTo(correctPoint.x, correctPoint.y);
+            correctPoint = centerRadiusPoint(width + halfHeight, halfHeight, startP, halfHeight);
+            endArrow.moveTo(correctPoint.x, correctPoint.y);
+            for(int i = 1; i < 10; i++){
+                if(i % 2 == 0){
+                    correctPoint = centerRadiusPoint(-halfHeight, halfHeight, startP + (i * perP), halfHeight);
+                    startArrow.lineTo(correctPoint.x, correctPoint.y);
+                    correctPoint = centerRadiusPoint(width + halfHeight, halfHeight, startP + (i * perP), halfHeight);
+                    endArrow.lineTo(correctPoint.x, correctPoint.y);
+                }else{
+                    correctPoint = centerRadiusPoint(-halfHeight, halfHeight, startP + (i * perP), halfHeight / 1.8F);
+                    startArrow.lineTo(correctPoint.x, correctPoint.y);
+                    correctPoint = centerRadiusPoint(width + halfHeight, halfHeight, startP + (i * perP), halfHeight / 1.8F);
+                    endArrow.lineTo(correctPoint.x, correctPoint.y);
+                }
+            }
+
+            startArrow.close();
             endArrow.close();
+
+//            startArrow.moveTo(0, 0);
+//            startArrow.lineTo(halfHeight, 0);
+//            startArrow.lineTo(0, halfHeight);
+//            startArrow.close();
+//
+//            endArrow.moveTo(width, height);
+//            endArrow.lineTo(width, height - halfHeight);
+//            endArrow.lineTo(width - halfHeight, height);
+//            endArrow.close();
+
+
         }
 
         paint.setColor(backgroundColor);
@@ -61,5 +88,12 @@ public class ArrowBackgroundSpan extends BackgroundSpannable {
                 canvas.drawPath(endArrow, paint);
                 break;
         }
+    }
+
+    private PointF centerRadiusPoint(int centerX, int centerY, double angle, double radius){
+        float x = (float) (radius * Math.cos(angle) + centerX);
+        float y = (float) (radius * Math.sin(angle) + centerY);
+
+        return new PointF(x, y);
     }
 }

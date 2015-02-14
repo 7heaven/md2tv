@@ -20,11 +20,13 @@ public class MDEditText extends EditText {
 
     private Object buffer;
 
-    private Object[] selectionSpan;
+    private Object[] selectionSpans;
 
     private int defaultHighlightColor;
 
     private boolean shouldBackgroundSpanDraw = true;
+
+    private boolean selectionSpanAtTop = false;
 
     public MDEditText(Context context) {
         this(context, null);
@@ -32,33 +34,29 @@ public class MDEditText extends EditText {
 
     public MDEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
-
-
-        this.setHighlightColor(0x0);
     }
 
     public MDEditText(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-
-        this.setHighlightColor(0x0);
     }
 
 
+    public void setSelectionSpanAtTop(boolean atTop){
+        this.selectionSpanAtTop = atTop;
+        invalidate();
+    }
 
     public void parseMarkDown(CharSequence text){
         //TODO parse markdown string
     }
 
     public void setSelectionSpan(Object... span){
-        this.selectionSpan = span;
-    }
-
-    private boolean handleMotionEvent(MotionEvent event){
-        int action = event.getAction();
-        SpannableString buffer = (SpannableString) getText();
-
-        //TODO handle span with Click event
-        return true;
+        if(span != null && span.length > 0){
+            this.setHighlightColor(0x0);
+        }else{
+            this.setHighlightColor(0xFF0099CC);
+        }
+        this.selectionSpans = span;
     }
 
     @Override
@@ -70,8 +68,8 @@ public class MDEditText extends EditText {
 
     @Override
     protected void onSelectionChanged(int selStart, int selEnd) {
-        if(this.getDefaultEditable() && this.selectionSpan != null){
-            for(Object span : this.selectionSpan){
+        if(this.getDefaultEditable() && this.selectionSpans != null){
+            for(Object span : this.selectionSpans){
                 ((Spannable) getText()).setSpan(span, selStart, selEnd, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
             }
 
@@ -101,13 +99,33 @@ public class MDEditText extends EditText {
         }
 
         if(shouldBackgroundSpanDraw && cacheBackgroundSpannables != null && cacheBackgroundSpannables.length > 0){
-            for(int i = 0; i < cacheBackgroundSpannables.length; i++){
-//                if(cacheBackgroundSpannables[i] == this.selectionSpan) continue;
-                cacheBackgroundSpannables[i].updateDrawState(canvas);
+            outter: for(BackgroundSpannable span : cacheBackgroundSpannables){
+                for(Object selectionSpan : selectionSpans){
+                    if(span == selectionSpan){
+                        continue outter;
+                    }
+                }
+                span.updateDrawState(canvas);
             }
         }
 
 
-        super.onDraw(canvas);
+        if(selectionSpanAtTop){
+            super.onDraw(canvas);
+            for(Object selectionSpan : selectionSpans){
+                if(selectionSpan instanceof BackgroundSpannable){
+                    BackgroundSpannable span = (BackgroundSpannable) selectionSpan;
+                    span.setMainTextView(this);
+                    span.updateDrawState(canvas);
+                }
+            }
+        }else{
+            for(Object selectionSpan : selectionSpans){
+                if(selectionSpan instanceof BackgroundSpannable){
+                    ((BackgroundSpannable) selectionSpan).updateDrawState(canvas);
+                }
+            }
+            super.onDraw(canvas);
+        }
     }
 }

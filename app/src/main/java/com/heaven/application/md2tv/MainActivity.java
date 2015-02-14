@@ -44,8 +44,9 @@ public class MainActivity extends Activity {
         Drawable drawable = getResources().getDrawable(R.drawable.paint_streak);
 //        textView.setSelectionSpan(new CornerBackgroundSpan(0xFF0099CC, 10));
 
-//        textView.setSelectionSpan(new ArrowBackgroundSpan(0xFFFF7373, 0x22000000), new ForegroundColorSpan(0xFF777777));
-        textView.setSelectionSpan(new TypefaceResourceSpan(this.getApplicationContext(), "PillGothic300mgRegular.ttf"), new ForegroundColorSpan(0xFF555555));
+        textView.setSelectionSpan(new ArrowBackgroundSpan(0xFFFF7373, 0x22000000));
+        textView.setSelectionSpanAtTop(true);
+//        textView.setSelectionSpan(new TypefaceResourceSpan(this.getApplicationContext(), "PillGothic300mgRegular.ttf"), new ForegroundColorSpan(0xFF555555));
         ss.setSpan(new CornerBackgroundSpan(0xFF0099CC, 10), 30, 70, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         ss.setSpan(new CornerBackgroundSpan(0xFF0099CC, 10), 250, 450, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         ss.setSpan(new ForegroundColorSpan(0xFFFFFFFF), 250, 450, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
