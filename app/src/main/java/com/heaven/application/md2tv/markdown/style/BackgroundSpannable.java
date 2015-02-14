@@ -3,12 +3,8 @@ package com.heaven.application.md2tv.markdown.style;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.shapes.RoundRectShape;
 import android.text.Layout;
 import android.widget.TextView;
-
-import com.heaven.application.md2tv.markdown.MDTextView;
 
 /**
  * Created by caifangmao on 15/2/13.
