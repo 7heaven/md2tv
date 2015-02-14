@@ -2,21 +2,11 @@ package com.heaven.application.md2tv.markdown;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.text.Editable;
-import android.text.Selection;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.SpannedString;
-import android.text.TextUtils;
-import android.text.method.ArrowKeyMovementMethod;
-import android.text.method.MovementMethod;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
-import android.view.accessibility.AccessibilityEvent;
-import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.EditText;
 
 import com.heaven.application.md2tv.markdown.style.BackgroundSpannable;
@@ -59,15 +49,6 @@ public class MDEditText extends EditText {
         //TODO parse markdown string
     }
 
-//    @Override
-//    public boolean onTouchEvent(MotionEvent event){
-//        if(getText() instanceof SpannableString && handleMotionEvent(event) && getMovementMethod() != null){
-//            return super.onTouchEvent(event);
-//        }else{
-//            return false;
-//        }
-//    }
-
     public void setSelectionSpan(BackgroundSpannable span){
         this.selectionSpan = span;
     }
@@ -89,8 +70,10 @@ public class MDEditText extends EditText {
 
     @Override
     protected void onSelectionChanged(int selStart, int selEnd) {
+        preSelectionStart = selStart;
+        preSelectionEnd = selEnd;
         if(this.getDefaultEditable() && this.selectionSpan != null){
-            ((Spannable) getText()).setSpan(this.selectionSpan, this.getSelectionStart(), this.getSelectionEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ((Spannable) getText()).setSpan(this.selectionSpan, selStart, selEnd, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         }
     }
 
@@ -117,7 +100,6 @@ public class MDEditText extends EditText {
         }
 
         if(shouldBackgroundSpanDraw && cacheBackgroundSpannables != null && cacheBackgroundSpannables.length > 0){
-            Log.d("shouldBackgroundSpanDraw", "dd");
             for(int i = 0; i < cacheBackgroundSpannables.length; i++){
 //                if(cacheBackgroundSpannables[i] == this.selectionSpan) continue;
                 cacheBackgroundSpannables[i].updateDrawState(canvas);
