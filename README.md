@@ -8,6 +8,7 @@ customize selection style:
 
 ![artgif1](https://github.com/7heaven/md2tv/blob/master/arts/art_gif_1.gif)
 ![artgif2](https://github.com/7heaven/md2tv/blob/master/arts/art_gif_2.gif)
+![artgif3](https://github.com/7heaven/md2tv/blob/master/arts/art_gif_3.gif)
 
 customize lines background with any drawable or shape:
 
