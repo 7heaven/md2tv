@@ -42,7 +42,7 @@ public abstract class BackgroundSpannable {
         if(layout != null){
 
             int saveBound = canvas.save();
-            canvas.clipRect(tv.getPaddingLeft(), 0, canvas.getWidth() - tv.getPaddingRight(), layout.getHeight());
+            canvas.clipRect(tv.getPaddingLeft(), tv.getTotalPaddingTop() + layout.getTopPadding() + tv.getScrollY(), canvas.getWidth() - tv.getPaddingRight(), tv.getTotalPaddingTop() + layout.getTopPadding() + tv.getScrollY() + (tv.getHeight() - tv.getTotalPaddingTop() - tv.getTotalPaddingBottom()));
 
             lineStart = layout.getLineForOffset(start);
             lineEnd = layout.getLineForOffset(end);
