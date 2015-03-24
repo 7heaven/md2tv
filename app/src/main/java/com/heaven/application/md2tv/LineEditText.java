@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.text.Layout;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.EditText;
 
@@ -63,11 +64,13 @@ public class LineEditText extends EditText {
         super.onDraw(canvas);
         if(getLayout() != null){
             Layout layout = getLayout();
+
             int paddingTop = getTotalPaddingTop();
             int totalLines = layout.getLineCount();
+            int lines = 1;
             for(int i = 0; i < totalLines; i++){
                 int baseLine = layout.getLineBounds(i, lineBound);
-                String line = (i + 1) + "";
+                String line = (lines) + "";
 
                 paint.getTextBounds(line, 0, line.length(), lineNumberBound);
 

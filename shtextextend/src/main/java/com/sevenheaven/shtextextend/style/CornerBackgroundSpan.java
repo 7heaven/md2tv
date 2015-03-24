@@ -1,4 +1,4 @@
-package com.heaven.application.md2tv.markdown.style;
+package com.sevenheaven.shtextextend.style;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;

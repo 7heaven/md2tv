@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/md2tv.iml" filepath="$PROJECT_DIR$/md2tv.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shtextextend/shtextextend.iml" filepath="$PROJECT_DIR$/shtextextend/shtextextend.iml" />
     </modules>
   </component>
 </project>

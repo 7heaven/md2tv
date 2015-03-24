@@ -1,4 +1,4 @@
-package com.heaven.application.md2tv.markdown;
+package com.sevenheaven.shtextextend;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -8,11 +8,11 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.SpannedString;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
-import com.heaven.application.md2tv.markdown.style.BackgroundSpannable;
+import com.sevenheaven.shtextextend.style.BackgroundSpannable;
+
 
 /**
  * Created by caifangmao on 15/2/13.

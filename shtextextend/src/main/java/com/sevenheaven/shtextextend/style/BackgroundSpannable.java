@@ -1,4 +1,4 @@
-package com.heaven.application.md2tv.markdown.style;
+package com.sevenheaven.shtextextend.style;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -23,6 +23,14 @@ public abstract class BackgroundSpannable {
     private int start;
     private int end;
 
+    /**
+     *  当前行的模式
+     *
+     *  LinePositionStart Span从本行开始
+     *  LinePositionMiddle Span的start、end不在本行，但是包括了本行
+     *  LinePositionEnd Span到本行结束
+     *  LinePositionSingle Span的start、end都在本行
+     */
     public enum LinePosition{
         LinePositionStart, LinePositionMiddle, LinePositionEnd, LinePositionSingle;
     }
@@ -36,20 +44,37 @@ public abstract class BackgroundSpannable {
         this.end = end;
     }
 
+    public int getStart(){
+        return this.start;
+    }
+
+    public int getEnd(){
+        return this.end;
+    }
+
     public void updateDrawState(Canvas canvas){
         Layout layout = tv.getLayout();
 
         if(layout != null){
 
             int saveBound = canvas.save();
-            canvas.clipRect(tv.getPaddingLeft(), tv.getTotalPaddingTop() + layout.getTopPadding() + tv.getScrollY(), canvas.getWidth() - tv.getPaddingRight(), tv.getTotalPaddingTop() + layout.getTopPadding() + tv.getScrollY() + (tv.getHeight() - tv.getTotalPaddingTop() - tv.getTotalPaddingBottom()));
 
+            //计算剪裁矩形，保证绘制内容不会超出文本layout
+            int clipLeft = tv.getPaddingLeft();
+            int clipTop = tv.getTotalPaddingTop() + tv.getScrollY();
+            int clipRight = canvas.getWidth() - tv.getPaddingRight();
+            int clipBottom = clipTop + (tv.getHeight() - tv.getTotalPaddingTop() - tv.getTotalPaddingBottom());
+
+            canvas.clipRect(clipLeft, clipTop, clipRight, clipBottom);
+
+            //根据start end  获得起始行数和结束行数
             lineStart = layout.getLineForOffset(start);
             lineEnd = layout.getLineForOffset(end);
 
             if(lineStart != lineEnd){
                 lines = new Rect[(lineEnd + 1) - lineStart];
 
+                //计算每一行中包含当前span的矩形大小
                 for(int i = lineStart; i <= lineEnd; i++){
                     Rect rect = new Rect();
                     layout.getLineBounds(i, rect);
@@ -89,6 +114,7 @@ public abstract class BackgroundSpannable {
 
             int length = lineEnd - lineStart;
 
+            //绘制
             for(int i = 0; i <= lineEnd - lineStart; i++){
                 Rect rect = lines[i];
 
