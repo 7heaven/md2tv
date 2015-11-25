@@ -217,6 +217,7 @@ public class MDEditText extends EditText {
             }
         }
 
+        //span
         if(shouldBackgroundSpanDraw && cacheBackgroundSpannables != null && cacheBackgroundSpannables.length > 0){
             outter: for(BackgroundSpannable span : cacheBackgroundSpannables){
                 for(Object selectionSpan : selectionSpans){
@@ -229,6 +230,7 @@ public class MDEditText extends EditText {
         }
 
 
+        //selectionSpan
         if(this.selectionSpans != null && this.selectionSpans.length > 0){
 
             int start = getSelectionStart();
@@ -259,6 +261,7 @@ public class MDEditText extends EditText {
             super.onDraw(canvas);
         }
 
+        //lineNumber
         if(getLayout() != null && lineNumberEnabled){
 
             int clipLeft = 0;
@@ -273,7 +276,6 @@ public class MDEditText extends EditText {
 
             int paddingTop = getTotalPaddingTop();
             int totalLines = layout.getLineCount();
-            int lines = 1;
 
             String lineString = totalLines + "";
 
